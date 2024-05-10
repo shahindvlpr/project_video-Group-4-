@@ -2,3 +2,49 @@ Group - 04
 
 our project video link : https://drive.google.com/file/d/1l3wN0Ah9rpXaO6vbU9Nk4I-3koMmQqog/view?usp=drive_link
 our project githum repo. link : https://github.com/shahindvlpr/project_video-group-4-.git
+
+for our project arduino code...
+
+int flame1 = A0;     
+int Beep = 9;       
+int relay = 13;     
+int flame2 = A1;
+
+int val1 = 0;
+int val2 = 0;        
+bool fireDetected = false;  
+
+void setup() {
+  pinMode(Beep, OUTPUT);   
+  pinMode(relay, OUTPUT);  
+  pinMode(flame1, INPUT);   
+  pinMode(flame2,INPUT);
+  Serial.begin(9600);      
+}
+
+void loop() {
+
+  val1 = analogRead(flame1);
+  val2 = analogRead(flame2);
+
+  Serial.println(val1);
+  Serial.println(val2);
+
+  if (val1 <= 200 || val2 <= 200) {
+
+    digitalWrite(relay, LOW);
+    fireDetected = true;
+  } else {
+
+    digitalWrite(relay, HIGH);
+    fireDetected = false;
+  }
+
+  if (fireDetected) {
+    digitalWrite(Beep, HIGH);
+  } else {
+    digitalWrite(Beep, LOW);
+  }
+
+  delay(500);
+}
